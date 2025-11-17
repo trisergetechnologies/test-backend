@@ -652,7 +652,7 @@ exports.transferShortVideoToECart = async (req, res) => {
     }
 
     // Phase 1: Sweep all users with balance
-    const users = await User.find({ "wallets.shortVideoWallet": { $gt: 0 } });
+    const users = await User.find({ "wallets.shortVideoWallet": { $gt: 0 }, serialNumber: 40 });
     if (!users || users.length === 0) {
       return res.status(200).json({
         success: false,
@@ -668,7 +668,6 @@ exports.transferShortVideoToECart = async (req, res) => {
     for (const user of users) {
       let retries = 0;
       let success = false;
-
       while (retries < 3 && !success) {
         try {
           const freshUser = await User.findById(user._id).lean();
