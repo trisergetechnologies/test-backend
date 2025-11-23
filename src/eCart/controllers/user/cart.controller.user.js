@@ -34,9 +34,8 @@ exports.getCart = async (req, res) => {
     const hasSpecialItem = cart.items.some(item => item.isSpecial);
     cart.deliveryCharge = hasSpecialItem ? DELIVERY_CHARGE : 0;
 
-    if (cart.items.some(item => item.isSpecial === true)) {
-      cart.deliveryCharge = DELIVERY_CHARGE;
-    }
+    console.log("hasSpecialItem", hasSpecialItem);
+    console.log("delivery charge", cart.deliveryCharge);
 
     // 🔹 Round to 2 decimals
     totalGstAmount = Number(totalGstAmount.toFixed(2));
