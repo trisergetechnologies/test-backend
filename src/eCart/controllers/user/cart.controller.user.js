@@ -31,7 +31,7 @@ exports.getCart = async (req, res) => {
       }
     });
 
-    const hasSpecialItem = cart.items.some(item => item.isSpecial);
+    const hasSpecialItem = cart.items.some(item => item.productId.isSpecial);
     cart.deliveryCharge = hasSpecialItem ? DELIVERY_CHARGE : 0;
 
     console.log("hasSpecialItem", hasSpecialItem);
