@@ -89,7 +89,7 @@ exports.placeOrder = async (req, res) => {
       product.stock -= item.quantity;
       await product.save({ session });
     }
-    let grossPayable = subtotal + cart.totalGstAmount;
+    let grossPayable = subtotal + cart.totalGstAmount + cart.deliveryCharge;
 
     // 5. Wallet usage
     let usedWalletAmount = 0;
@@ -124,6 +124,7 @@ exports.placeOrder = async (req, res) => {
       usedWalletAmount,
       totalAmount: subtotal,
       finalAmountPaid,
+      deliveryCharge: cart.deliveryCharge,
       totalGstAmount: cart.totalGstAmount,
       paymentStatus: 'paid',
       status: 'placed',

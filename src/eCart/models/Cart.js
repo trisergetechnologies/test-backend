@@ -21,6 +21,11 @@ const CartSchema = new mongoose.Schema({
     unique: true, // One cart per user
     required: true
   },
+  
+  deliveryCharge:{
+    type: Number,
+    default: 0
+  },
 
   items: [CartItemSchema],
   

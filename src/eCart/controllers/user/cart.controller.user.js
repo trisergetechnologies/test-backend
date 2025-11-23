@@ -1,6 +1,8 @@
 const Cart = require("../../models/Cart");
 const Product = require("../../models/Product");
 
+const DELIVERY_CHARGE = 100;
+
 exports.getCart = async (req, res) => {
   try {
     const user = req.user;
@@ -28,6 +30,10 @@ exports.getCart = async (req, res) => {
         totalGstAmount += gstForItem;
       }
     });
+
+    if (cart.items.some(item => item.isSpecial === true)) {
+      cart.deliveryCharge = DELIVERY_CHARGE;
+    }
 
     // 🔹 Round to 2 decimals
     totalGstAmount = Number(totalGstAmount.toFixed(2));

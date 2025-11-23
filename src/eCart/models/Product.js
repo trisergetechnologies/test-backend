@@ -58,6 +58,11 @@ const ProductSchema = new mongoose.Schema({
     min: 0
   },
 
+  isSpecial:{
+    type: Boolean,
+    default: false
+  },
+
   isActive: {
     type: Boolean,
     default: true
